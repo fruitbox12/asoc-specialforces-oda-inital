@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const consoleInput = document.getElementById("consoleInput");
     const consoleOutput = document.getElementById("consoleOutput");
-    const apiUrl = 'https://your-api-url.vercel.app'; // Replace with your API URL
+    const apiUrl = 'https://asoc-specialforces-oda-inital-blocked.vercel.app'; // Replace with your API URL
 
     async function fetchMemberData(memberName) {
         try {
