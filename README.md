@@ -8,8 +8,7 @@ API Structure
 
 The API is structured to provide a comprehensive view of the ODA, including individual member details and their equipment.
 
-`````Endpoint``s```
-
+````End Points```
 Get All Data:
 
 ``Endpoint``: /
