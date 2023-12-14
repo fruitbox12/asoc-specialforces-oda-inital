@@ -1,21 +1,37 @@
 document.addEventListener("DOMContentLoaded", function() {
     const consoleInput = document.getElementById("consoleInput");
     const consoleOutput = document.getElementById("consoleOutput");
+    const apiUrl = 'https://your-api-url.vercel.app'; // Replace with your API URL
 
-    function processCommand(command) {
+    async function fetchMemberData(memberName) {
+        try {
+            const response = await fetch(`${apiUrl}/members/${encodeURIComponent(memberName)}`);
+            if (!response.ok) {
+                throw new Error(`Member not found: ${memberName}`);
+            }
+            const memberData = await response.json();
+            return memberData;
+        } catch (error) {
+            return error.message;
+        }
+    }
+
+    async function processCommand(command) {
         const args = command.split(' ');
-        switch (args[0].toLowerCase()) {
+        const commandType = args.shift().toLowerCase();
+        const commandArgs = args.join(' ');
+
+        switch (commandType) {
             case 'help':
                 addLineToConsole("Available commands: help, team, member [name], clear");
                 break;
             case 'team':
-                // Assume you fetch this data from somewhere
                 addLineToConsole("Team Size: 12, Unit Type: Special Forces");
                 break;
             case 'member':
-                if (args.length > 1) {
-                    // Here you would fetch member data based on args[1]
-                    addLineToConsole(`Data for member ${args[1]}`);
+                if (commandArgs) {
+                    const memberData = await fetchMemberData(commandArgs);
+                    addLineToConsole(typeof memberData === 'string' ? memberData : JSON.stringify(memberData));
                 } else {
                     addLineToConsole("Please specify a member name.");
                 }
@@ -35,10 +51,10 @@ document.addEventListener("DOMContentLoaded", function() {
         consoleOutput.scrollTop = consoleOutput.scrollHeight;
     }
 
-    consoleInput.addEventListener("keydown", function(event) {
+    consoleInput.addEventListener("keydown", async function(event) {
         if (event.key === "Enter") {
             addLineToConsole(consoleInput.value);
-            processCommand(consoleInput.value);
+            await processCommand(consoleInput.value);
             consoleInput.value = "";
         }
     });
