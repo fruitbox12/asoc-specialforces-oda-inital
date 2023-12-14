@@ -1,0 +1,35 @@
+body {
+    background-color: black;
+    color: limegreen;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#console {
+    width: 80%;
+    height: 70%;
+    background-color: #000;
+    box-shadow: 0 0 10px #333;
+    overflow: hidden;
+}
+
+#consoleOutput {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+    height: 90%;
+    overflow-y: auto;
+}
+
+#consoleOutput li {
+    margin-bottom: 8px;
+}
+
+#consoleInput {
+    width: 100%;
+    border:
